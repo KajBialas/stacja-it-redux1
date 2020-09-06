@@ -1,10 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { ACTION_TYPES } from '../index';
 
-function TodoList({todoList}) {
+function TodoList({todoList, todoMarkComplete}) {
   const renderTodos = () =>
     todoList.map((elementTodo, index) =>
-      <div key={`${elementTodo}-${index}`}>{elementTodo}</div>);
+      <div key={elementTodo.id} onClick={() => todoMarkComplete(index)}>
+        {elementTodo.text}
+        {elementTodo.completed ? '- zadanie wykonane' : '- zadanie niewykonane'}
+      </div>);
 
   return (
     <div>
@@ -20,4 +24,10 @@ const mapStateToProps = state => {
   }
 };
 
-export default connect(mapStateToProps)(TodoList);
+const mapDispatchToProps = dispatch => {
+  return {
+    todoMarkComplete: (value) => dispatch({type: ACTION_TYPES.TODO_MARK_COMPLETE, payload: value})
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
