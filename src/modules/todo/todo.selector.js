@@ -11,3 +11,5 @@ export const selectNotCompletedTodo = createSelector(
 );
 
 export const selectLoadingStatus = state => state.todo.isLoading;
+
+export const selectErrorStatus = state => state.todo.isError;

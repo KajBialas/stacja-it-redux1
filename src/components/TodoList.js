@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { TODO_ACTION_TYPES } from '../modules/todo/todo.action';
-import { selectNotCompletedTodo, selectCompletedTodo, selectLoadingStatus } from '../modules/todo/todo.selector';
+import { selectNotCompletedTodo, selectCompletedTodo, selectLoadingStatus, selectErrorStatus } from '../modules/todo/todo.selector';
 import { ACTION_FETCH_TODOS } from '../modules/todo/todo.action';
 
-function TodoList({todoListCompleted, todoListNotCompleted, todoMarkComplete, fetchTodo, todoLoading}) {
+function TodoList({todoListCompleted, todoListNotCompleted, todoMarkComplete, fetchTodo, todoLoading, todoError}) {
   useEffect(() => {
     !todoListCompleted.length && !todoListNotCompleted.length && fetchTodo();
   }, [fetchTodo]);
@@ -20,6 +20,7 @@ function TodoList({todoListCompleted, todoListNotCompleted, todoMarkComplete, fe
     <div>
       <h2>Lista todo</h2>
       {todoLoading ? <div>ładowanie...</div> :
+        todoError ? <div>Błąd ładowania danych</div> :
         <>
           <h3>Lista zadań niewykonanych</h3>
           {todoListNotCompleted.length ? renderTodos(todoListNotCompleted) : <div>Brak elementów TODO</div> }
@@ -36,6 +37,7 @@ const mapStateToProps = state => {
     todoListNotCompleted: selectNotCompletedTodo(state),
     todoListCompleted: selectCompletedTodo(state),
     todoLoading: selectLoadingStatus(state),
+    todoError: selectErrorStatus(state),
   }
 };
 

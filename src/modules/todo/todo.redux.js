@@ -37,7 +37,14 @@ export default (state = COUNTER_INITIAL_STATE, action) => {
       return state = {
         ...state,
         isLoading: false,
+        isError: false,
         list: action.payload,
+      };
+    case TODO_ACTION_TYPES.FETCH_ERROR:
+      return state = {
+        ...state,
+        isLoading: false,
+        isError: true,
       };
     default:
       return state;
