@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { ACTION_TYPES } from './index';
+import { ACTION_TYPES } from '../index';
+import TodoList from '../components/TodoList';
 
 function App({count, incrementCounter, decrementCounter, resetCounter, changeCounter}) {
   return (
@@ -10,6 +11,7 @@ function App({count, incrementCounter, decrementCounter, resetCounter, changeCou
       <button onClick={decrementCounter} >-</button>
       <button onClick={resetCounter} >RESET</button>
       <input value={count} onChange={changeCounter} />
+      <TodoList />
     </div>
   );
 }

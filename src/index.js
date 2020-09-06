@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './routes/App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Subpage from './Subpage';
-import Nav from './Nav';
+import Subpage from './routes/Subpage';
+import Nav from './components/Nav';
+import Todo from './routes/Todo';
 
 const INITIAL_STATE = {
   counter: 0,
@@ -19,6 +20,7 @@ export const ACTION_TYPES = {
   COUNTER_DECREMENT: 'COUNTER_DECREMENT',
   COUNTER_RESET: 'COUNTER_RESET',
   COUNTER_CHANGE: 'COUNTER_CHANGE',
+  TODO_ADD: 'TODO_ADD',
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -43,6 +45,11 @@ const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         counter: Number(action.payload),
       };
+    case ACTION_TYPES.TODO_ADD:
+      return state = {
+        ...state,
+        todo: [...state.todo, action.payload],
+      };
     default:
       return state;
   }
@@ -60,6 +67,7 @@ ReactDOM.render(
       <Switch>
         <Route exact path="/" component={App} />
         <Route exact path="/subpage" component={Subpage} />
+        <Route exact path="/todo" component={Todo} />
       </Switch>
     </BrowserRouter>
   </Provider>,

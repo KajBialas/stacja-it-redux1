@@ -12,7 +12,7 @@ function Subpage({count}) {
 
 const mapStateToProps = state => {
   return {
-    count: state,
+    count: state.counter,
   }
 };
 
