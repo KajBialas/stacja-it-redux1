@@ -9,22 +9,49 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Subpage from './Subpage';
 import Nav from './Nav';
 
-const reducer = (state = 0, action) => {
+const INITIAL_STATE = {
+  counter: 0,
+  todo: [],
+};
+
+export const ACTION_TYPES = {
+  COUNTER_INCREMENT: 'COUNTER_INCREMENT',
+  COUNTER_DECREMENT: 'COUNTER_DECREMENT',
+  COUNTER_RESET: 'COUNTER_RESET',
+  COUNTER_CHANGE: 'COUNTER_CHANGE',
+};
+
+const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case 'INCREMENT':
-      return state = state + 1;
-    case 'DECREMENT':
-      return state = state - 1;
-    case 'RESET':
-      return state = 0;
-    case 'CHANGE':
-      return state = Number(action.payload);
+    case ACTION_TYPES.COUNTER_INCREMENT:
+      return state = {
+        ...state,
+        counter: state.counter + 1,
+      };
+    case ACTION_TYPES.COUNTER_DECREMENT:
+      return state = {
+        ...state,
+        counter: state.counter - 1,
+      };
+    case ACTION_TYPES.COUNTER_RESET:
+      return {
+        ...state,
+        counter: 0,
+      };
+    case ACTION_TYPES.COUNTER_CHANGE:
+      return state = {
+        ...state,
+        counter: Number(action.payload),
+      };
     default:
       return state;
   }
 };
 
-const store = createStore(reducer);
+const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 ReactDOM.render(
   <Provider store={store}>

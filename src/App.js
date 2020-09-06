@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { ACTION_TYPES } from './index';
 
 function App({count, incrementCounter, decrementCounter, resetCounter, changeCounter}) {
   return (
@@ -15,16 +16,16 @@ function App({count, incrementCounter, decrementCounter, resetCounter, changeCou
 
 const mapStateToProps = state => {
   return {
-    count: state,
+    count: state.counter,
   }
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    incrementCounter: () => dispatch({type: 'INCREMENT'}),
-    decrementCounter: () => dispatch({type: 'DECREMENT'}),
-    resetCounter: () => dispatch({type: 'RESET'}),
-    changeCounter: (e) => dispatch({type: 'CHANGE', payload: e.target.value})
+    incrementCounter: () => dispatch({type: ACTION_TYPES.COUNTER_INCREMENT}),
+    decrementCounter: () => dispatch({type: ACTION_TYPES.COUNTER_DECREMENT}),
+    resetCounter: () => dispatch({type: ACTION_TYPES.COUNTER_RESET}),
+    changeCounter: (e) => dispatch({type: ACTION_TYPES.COUNTER_CHANGE, payload: e.target.value})
   }
 };
 
