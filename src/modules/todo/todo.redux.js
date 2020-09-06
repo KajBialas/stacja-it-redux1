@@ -10,7 +10,7 @@ export default (state = COUNTER_INITIAL_STATE, action) => {
       const newTodoElementId = state.list.length ? state.list.length + 1 : 1;
       const newTodoElement = {
         id: newTodoElementId,
-        text: action.payload,
+        title: action.payload,
         completed: false,
       };
 
@@ -25,6 +25,10 @@ export default (state = COUNTER_INITIAL_STATE, action) => {
       return state = {
         ...state,
         list: newTodoArray,
+      };
+    case TODO_ACTION_TYPES.FETCH_SUCCESS:
+      return state = {
+        list: action.payload,
       };
     default:
       return state;

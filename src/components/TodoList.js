@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { TODO_ACTION_TYPES } from '../modules/todo/todo.action';
 import { selectNotCompletedTodo, selectCompletedTodo } from '../modules/todo/todo.selector';
+import { ACTION_FETCH_TODOS } from '../modules/todo/todo.action';
 
-function TodoList({todoListCompleted, todoListNotCompleted, todoMarkComplete}) {
+function TodoList({todoListCompleted, todoListNotCompleted, todoMarkComplete, fetchTodo}) {
+  useEffect(() => {
+    !todoListCompleted.length && !todoListNotCompleted.length && fetchTodo();
+  }, [fetchTodo]);
+
   const renderTodos = (list) =>
     list.map((elementTodo) =>
       <div key={elementTodo.id} onClick={() => todoMarkComplete(elementTodo.id)}>
-        {elementTodo.text}
+        {elementTodo.title}
         {elementTodo.completed ? '- zadanie wykonane' : '- zadanie niewykonane'}
       </div>);
 
@@ -31,7 +36,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    todoMarkComplete: (value) => dispatch({type: TODO_ACTION_TYPES.MARK_COMPLETE, payload: value})
+    todoMarkComplete: (value) => dispatch({type: TODO_ACTION_TYPES.MARK_COMPLETE, payload: value}),
+    fetchTodo: () => dispatch(ACTION_FETCH_TODOS()),
   }
 };
 
