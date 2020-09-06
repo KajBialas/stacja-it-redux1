@@ -20,7 +20,8 @@ export default (state = COUNTER_INITIAL_STATE, action) => {
       };
     case TODO_ACTION_TYPES.MARK_COMPLETE:
       const newTodoArray = [...state.list];
-      newTodoArray[action.payload].completed = !newTodoArray[action.payload].completed;
+      const selectedItem = newTodoArray.find(el => el.id === action.payload);
+      newTodoArray[newTodoArray.indexOf(selectedItem)].completed = !newTodoArray[newTodoArray.indexOf(selectedItem)].completed;
       return state = {
         ...state,
         list: newTodoArray,

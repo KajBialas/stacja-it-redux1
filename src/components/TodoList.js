@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { TODO_ACTION_TYPES } from '../modules/todo/todo.action';
 
-function TodoList({todoList, todoMarkComplete}) {
-  const renderTodos = () =>
-    todoList.map((elementTodo, index) =>
-      <div key={elementTodo.id} onClick={() => todoMarkComplete(index)}>
+function TodoList({todoListCompleted, todoListNotCompleted, todoMarkComplete}) {
+  const renderTodos = (list) =>
+    list.map((elementTodo) =>
+      <div key={elementTodo.id} onClick={() => todoMarkComplete(elementTodo.id)}>
         {elementTodo.text}
         {elementTodo.completed ? '- zadanie wykonane' : '- zadanie niewykonane'}
       </div>);
@@ -13,14 +13,18 @@ function TodoList({todoList, todoMarkComplete}) {
   return (
     <div>
       <h2>Lista todo</h2>
-      {todoList.length ? renderTodos() : <div>Brak elementów TODO</div> }
+      <h3>Lista zadań niewykonanych</h3>
+      {todoListNotCompleted.length ? renderTodos(todoListNotCompleted) : <div>Brak elementów TODO</div> }
+      <h3>Lista zadań wykonanych</h3>
+      {todoListCompleted.length ? renderTodos(todoListCompleted) : <div>Brak elementów TODO</div> }
     </div>
   )
 }
 
 const mapStateToProps = state => {
   return {
-    todoList: state.todo.list,
+    todoListNotCompleted: state.todo.list.filter(item => !item.completed),
+    todoListCompleted: state.todo.list.filter(item => item.completed),
   }
 };
 
