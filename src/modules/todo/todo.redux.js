@@ -2,6 +2,8 @@ import { TODO_ACTION_TYPES } from './todo.action';
 
 const COUNTER_INITIAL_STATE = {
   list: [],
+  isLoading: false,
+  isError: false,
 };
 
 export default (state = COUNTER_INITIAL_STATE, action) => {
@@ -26,8 +28,15 @@ export default (state = COUNTER_INITIAL_STATE, action) => {
         ...state,
         list: newTodoArray,
       };
+    case TODO_ACTION_TYPES.FETCH_LOADING:
+      return state = {
+        ...state,
+        isLoading: true,
+      };
     case TODO_ACTION_TYPES.FETCH_SUCCESS:
       return state = {
+        ...state,
+        isLoading: false,
         list: action.payload,
       };
     default:

@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { TODO_ACTION_TYPES } from '../modules/todo/todo.action';
-import { selectNotCompletedTodo, selectCompletedTodo } from '../modules/todo/todo.selector';
+import { selectNotCompletedTodo, selectCompletedTodo, selectLoadingStatus } from '../modules/todo/todo.selector';
 import { ACTION_FETCH_TODOS } from '../modules/todo/todo.action';
 
-function TodoList({todoListCompleted, todoListNotCompleted, todoMarkComplete, fetchTodo}) {
+function TodoList({todoListCompleted, todoListNotCompleted, todoMarkComplete, fetchTodo, todoLoading}) {
   useEffect(() => {
     !todoListCompleted.length && !todoListNotCompleted.length && fetchTodo();
   }, [fetchTodo]);
@@ -19,10 +19,14 @@ function TodoList({todoListCompleted, todoListNotCompleted, todoMarkComplete, fe
   return (
     <div>
       <h2>Lista todo</h2>
-      <h3>Lista zadań niewykonanych</h3>
-      {todoListNotCompleted.length ? renderTodos(todoListNotCompleted) : <div>Brak elementów TODO</div> }
-      <h3>Lista zadań wykonanych</h3>
-      {todoListCompleted.length ? renderTodos(todoListCompleted) : <div>Brak elementów TODO</div> }
+      {todoLoading ? <div>ładowanie...</div> :
+        <>
+          <h3>Lista zadań niewykonanych</h3>
+          {todoListNotCompleted.length ? renderTodos(todoListNotCompleted) : <div>Brak elementów TODO</div> }
+          <h3>Lista zadań wykonanych</h3>
+          {todoListCompleted.length ? renderTodos(todoListCompleted) : <div>Brak elementów TODO</div> }
+        </>
+      }
     </div>
   )
 }
@@ -31,6 +35,7 @@ const mapStateToProps = state => {
   return {
     todoListNotCompleted: selectNotCompletedTodo(state),
     todoListCompleted: selectCompletedTodo(state),
+    todoLoading: selectLoadingStatus(state),
   }
 };
 
