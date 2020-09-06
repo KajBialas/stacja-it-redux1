@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { ACTION_TYPES } from '../index';
+import { COUNTER_ACTION_TYPES} from '../modules/counter/counter.action';
 import TodoList from '../components/TodoList';
 
 function App({count, incrementCounter, decrementCounter, resetCounter, changeCounter}) {
@@ -18,16 +18,16 @@ function App({count, incrementCounter, decrementCounter, resetCounter, changeCou
 
 const mapStateToProps = state => {
   return {
-    count: state.counter,
+    count: state.counter.value,
   }
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    incrementCounter: () => dispatch({type: ACTION_TYPES.COUNTER_INCREMENT}),
-    decrementCounter: () => dispatch({type: ACTION_TYPES.COUNTER_DECREMENT}),
-    resetCounter: () => dispatch({type: ACTION_TYPES.COUNTER_RESET}),
-    changeCounter: (e) => dispatch({type: ACTION_TYPES.COUNTER_CHANGE, payload: e.target.value})
+    incrementCounter: () => dispatch({type: COUNTER_ACTION_TYPES.INCREMENT}),
+    decrementCounter: () => dispatch({type: COUNTER_ACTION_TYPES.DECREMENT}),
+    resetCounter: () => dispatch({type: COUNTER_ACTION_TYPES.RESET}),
+    changeCounter: (e) => dispatch({type: COUNTER_ACTION_TYPES.CHANGE, payload: e.target.value})
   }
 };
 

@@ -1,0 +1,4 @@
+export const TODO_ACTION_TYPES = {
+  ADD: 'TODO_ADD',
+  MARK_COMPLETE: 'TODO_MARK_COMPLETE',
+};
