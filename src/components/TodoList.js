@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { TODO_ACTION_TYPES } from '../modules/todo/todo.action';
-import { selecNotCompletedTodo, selectCompletedTodo } from '../modules/todo/todo.selector';
+import { selectNotCompletedTodo, selectCompletedTodo } from '../modules/todo/todo.selector';
 
 function TodoList({todoListCompleted, todoListNotCompleted, todoMarkComplete}) {
   const renderTodos = (list) =>
@@ -24,8 +24,8 @@ function TodoList({todoListCompleted, todoListNotCompleted, todoMarkComplete}) {
 
 const mapStateToProps = state => {
   return {
-    todoListNotCompleted: selecNotCompletedTodo(state.todo.list),
-    todoListCompleted: selectCompletedTodo(state.todo.list),
+    todoListNotCompleted: selectNotCompletedTodo(state),
+    todoListCompleted: selectCompletedTodo(state),
   }
 };
 

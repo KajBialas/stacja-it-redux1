@@ -1,5 +1,11 @@
-export const selectCompletedTodo = (todo) =>
-  todo.filter(item => item.completed);
+import { createSelector } from 'reselect';
 
-export const selecNotCompletedTodo = (todo) =>
-  todo.filter(item => !item.completed);
+export const selectCompletedTodo = createSelector(
+  (state) => state.todo.list,
+  (todoList) => todoList.filter(item => item.completed)
+);
+
+export const selectNotCompletedTodo = createSelector(
+  (state) => state.todo.list,
+  (todoList) => todoList.filter(item => !item.completed)
+);
