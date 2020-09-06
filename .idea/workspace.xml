@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="373a6a82-f0a1-487d-aad0-82cc19071169" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/modules/todo/todo.selector.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/TodoList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TodoList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/todo/todo.redux.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/todo/todo.redux.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -54,7 +54,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1599375402838</updated>
-      <workItem from="1599375404012" duration="10271000" />
+      <workItem from="1599375404012" duration="10872000" />
     </task>
     <servers />
   </component>
